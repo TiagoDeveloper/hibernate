@@ -45,7 +45,10 @@ public class ContatoDao implements GenericDao<Contato>{
 
 	@Override
 	public void alterar(Contato t) {
-		// TODO Auto-generated method stub
+		
+		this.manager.getTransaction().begin();
+		this.manager.merge(t);
+		this.manager.getTransaction().commit();
 		
 	}
 

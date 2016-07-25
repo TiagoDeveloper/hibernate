@@ -11,29 +11,29 @@ public class ContatoDaoTest {
 	
 	private ContatoDao dao;
 	
-	@Test
+
 	public void testContatoDao() {
-		
+		this.dao = new ContatoDao();
 	}
 
-	@Test
+	
 	public void testInserir() {
-		//this.dao = new ContatoDao();
-		//this.dao.inserir(new Contato("tania","taniamariapereira@gmail.com",81397206));
+		this.dao = new ContatoDao();
+		this.dao.inserir(new Contato("tania","taniamariapereira@gmail.com",81397206));
 		
 	}
 
-	@Test
+	
 	public void testListar() {
 		
-		/**this.dao = new ContatoDao();
+		this.dao = new ContatoDao();
 		for(Contato c : this.dao.listar()){
 			
 			System.out.println(c.toString());
-		}**/
+		}
 	}
 
-	@Test
+	
 	public void testPesquisar() {
 		this.dao = new ContatoDao();
 		Contato t = new Contato();
@@ -42,8 +42,17 @@ public class ContatoDaoTest {
 		
 	}
 
-	@Test
+	
 	public void testAlterar() {
+		
+		this.dao = new ContatoDao();
+		
+		Contato t = new Contato("Aender","aenderjl@hotmail.com",92806796);
+		t.setId(2L);
+		
+		this.dao.alterar(t);
+		
+		
 		
 	}
 
