@@ -2,32 +2,41 @@ package br.com.hibernate.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+
 
 @Entity
-public class Contato {
+@SequenceGenerator(name = "contato_sequences", sequenceName="contato_sequences", allocationSize=1)
+public class Contato{
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.AUTO, generator="contato_sequences")
 	private Long id;
 	private String nome;
 	private String email;
 	private int telefone;
+
+	@OneToOne
+	private SubContato subContato;
 	
 	
-	
+	public Contato(Long id, String nome, String email, int telefone, SubContato subContato) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.telefone = telefone;
+		this.subContato = subContato;
+	}
+
+
 	public Contato() {
 		
 	}
 
-	
-	public Contato(String nome, String email, int telefone) {
-		super();
-
-		this.nome = nome;
-		this.email = email;
-		this.telefone = telefone;
-	}
 
 	public Long getId() {
 		return id;
@@ -69,8 +78,21 @@ public class Contato {
 	}
 
 
+	public SubContato getSubContato() {
+		return subContato;
+	}
+
+
+	public void setSubContato(SubContato subContato) {
+		this.subContato = subContato;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Contato [id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + "]";
+		return "Contato [id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", subContato="
+				+ subContato + "]";
 	}
+	
+
 }
