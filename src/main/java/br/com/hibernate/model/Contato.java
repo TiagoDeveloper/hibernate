@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name = "contato_sequences", sequenceName="contato_sequences", allocationSize=1)
-public class Contato{
+public class Contato implements InterfaceContato{
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="contato_sequences")

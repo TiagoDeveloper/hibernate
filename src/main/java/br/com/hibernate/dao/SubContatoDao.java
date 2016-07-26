@@ -34,13 +34,13 @@ public class SubContatoDao implements GenericDao<SubContato>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<SubContato> listar() {
-		return this.manager.createQuery("select c from SubContato c").getResultList();
+	public List<SubContato> listar(String entity) {
+		return this.manager.createQuery("select c from "+entity+" c").getResultList();
 	}
 
 	@Override
-	public SubContato pesquisar(SubContato t) {
-		return this.manager.find(SubContato.class, t.getId());
+	public SubContato pesquisar(Long t) {
+		return this.manager.find(SubContato.class, t);
 	}
 
 	@Override
