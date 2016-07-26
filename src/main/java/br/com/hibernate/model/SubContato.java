@@ -8,7 +8,7 @@ import javax.persistence.SequenceGenerator;
 
 @Entity
 @SequenceGenerator(name = "subcontato_sequences", sequenceName="subcontato_sequences", allocationSize=1)
-public class SubContato implements InterfaceContato{
+public class SubContato{
 
 
 	@Id

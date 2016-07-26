@@ -6,8 +6,12 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+
 import br.com.hibernate.model.Contato;
 import br.com.hibernate.model.GenericDao;
+import br.com.hibernate.model.SubContato;
 
 public class ContatoDao<T> implements GenericDao<T>{
 	
@@ -40,8 +44,14 @@ public class ContatoDao<T> implements GenericDao<T>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T pesquisar(Long t) {
-		return (T) this.manager.find(Contato.class,t);
+	public T pesquisar(T t, Long id) {
+		
+		//System.out.println(t.getClass());
+		//Criteria c= 
+		//(T) this.manager.find(Contato.class,t)
+		//(T) this.manager.createQuery("select c from SubContato c where id=2").getSingleResult();
+		return (T) this.manager.find(t.getClass(),id); 
+		
 	}
 
 	@Override
