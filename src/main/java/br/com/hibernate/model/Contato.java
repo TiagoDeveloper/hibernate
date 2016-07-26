@@ -8,11 +8,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 
-@Entity
+@Entity			  //nome do annotation para futuras ref     //nome da tabela que conterá o índice 
 @SequenceGenerator(name = "contato_sequences", sequenceName="contato_sequences", allocationSize=1)
-public class Contato{
+public class Contato{															 //como será o increment
 	
-	@Id
+	@Id											  //ref da tabela que contém o increment
 	@GeneratedValue(strategy=GenerationType.AUTO, generator="contato_sequences")
 	private Long id;
 	private String nome;
@@ -87,8 +87,8 @@ public class Contato{
 		this.subContato = subContato;
 	}
 
-
-	@Override
+	
+	@Override //aprendi a fazer esse carinha esse dias, ctrl+3 e digitar toString que irá gerar automático, muito bom para os testes
 	public String toString() {
 		return "Contato [id=" + id + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", subContato="
 				+ subContato + "]";
