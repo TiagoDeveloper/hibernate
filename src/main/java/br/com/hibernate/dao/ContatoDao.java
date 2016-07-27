@@ -45,10 +45,6 @@ public class ContatoDao<T> implements GenericDao<T>{
 	@Override
 	public T pesquisar(T t, Long id) {
 		
-		//System.out.println(t.getClass());
-		//Criteria c= 
-		//(T) this.manager.find(Contato.class,t)
-		//(T) this.manager.createQuery("select c from SubContato c where id=2").getSingleResult();
 		return (T) this.manager.find(t.getClass(),id); 
 		
 	}
@@ -72,9 +68,10 @@ public class ContatoDao<T> implements GenericDao<T>{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<T> pesquisaNome(String nome){
+	public List<T> pesquisaNome(T t,String nome){
 		
-		Query query = this.manager.createQuery("select c from Contato c where c.nome like :nome");
+		Query query = this.manager.createQuery("select c from "+t.getClass().getSimpleName().toString()
+				+" c where c.nome like :nome");
 		query.setParameter("nome", "%"+nome+"%");
 
 		return query.getResultList();

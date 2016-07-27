@@ -130,7 +130,7 @@ public class ContatoDaoTest {
 	
 	public void testPesquisaNome(){
 		ContatoDao<Contato> dao = new ContatoDao<Contato>();
-		List<Contato> con = dao.pesquisaNome("tia");
+		List<Contato> con = dao.pesquisaNome(new Contato(),"tia");
 		
 		
 		for(Contato c : con){
@@ -149,7 +149,7 @@ public class ContatoDaoTest {
 	@Test
 	public void testes(){
 		
-		this.testListarContato();
+		this.testPesquisaNome();
 		
 	}
 
