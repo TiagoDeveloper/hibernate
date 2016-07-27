@@ -5,13 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-
-import br.com.hibernate.model.Contato;
 import br.com.hibernate.model.GenericDao;
-import br.com.hibernate.model.SubContato;
 
 public class ContatoDao<T> implements GenericDao<T>{
 	
@@ -38,8 +34,11 @@ public class ContatoDao<T> implements GenericDao<T>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<T> listar(String entity) {
-		return this.manager.createQuery("select c from "+entity+" c").getResultList();
+	public List<T> listar(T t) {
+		
+		Query query = this.manager.createQuery("select c from "+t.getClass().getSimpleName().toString()+" c");
+				
+		return query.getResultList();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -65,8 +64,19 @@ public class ContatoDao<T> implements GenericDao<T>{
 
 	@Override
 	public void deletar(T t) {
-		// TODO Auto-generated method stub
+		
+		this.manager.getTransaction().begin();
+		this.manager.remove(t);
+		this.manager.getTransaction().commit();
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> pesquisaNome(String nome){
+		
+		Query query = this.manager.createQuery("select c from Contato c where c.nome like :nome");
+		query.setParameter("nome", "%"+nome+"%");
 
+		return query.getResultList();
+	}
 }

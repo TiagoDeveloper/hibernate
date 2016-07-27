@@ -1,5 +1,7 @@
 package br.com.hibernate.dao.teste;
 
+import java.util.List;
+
 import org.junit.Test;
 
 import br.com.hibernate.dao.ContatoDao;
@@ -39,6 +41,8 @@ public class ContatoDaoTest {
 		dao.inserir(sc);
 		
 	}
+	
+	
 	public void testInserirContato() {
 		
 		ContatoDao<Contato> dao = new ContatoDao<Contato>();
@@ -46,10 +50,10 @@ public class ContatoDaoTest {
 
 		
 		Contato c = new Contato();
-		c.setNome("tiago");
-		c.setEmail("tiagopereirafonseca@gmail.com");
+		c.setNome("Zoraides");
+		c.setEmail("Zoraidesfonseca@gmail.com");
 		c.setTelefone(983606298);
-		//c.setSubContato(sdao.pesquisar(1L));
+		c.setSubContato(sdao.pesquisar(new SubContato(),1L));
 		
 		dao.inserir(c);
 		
@@ -60,7 +64,7 @@ public class ContatoDaoTest {
 		
 		ContatoDao<SubContato> dao = new ContatoDao<SubContato>();
 		
-		for(SubContato c : dao.listar("Subcontato")){
+		for(SubContato c : dao.listar(new SubContato())){
 			
 			System.out.println(c.toString());
 		}
@@ -70,7 +74,7 @@ public class ContatoDaoTest {
 		
 		ContatoDao<Contato> dao = new ContatoDao<Contato>();
 		
-		for(Contato c : dao.listar("contato")){
+		for(Contato c : dao.listar(new Contato())){
 			
 			System.out.println(c.toString());
 		}
@@ -89,7 +93,7 @@ public class ContatoDaoTest {
 		ContatoDao<Contato> dao = new ContatoDao<Contato>();
 		Contato t = new Contato();
 		t.setId(2L);
-		//System.out.println(dao.pesquisar(t.getId()).toString());
+		System.out.println(dao.pesquisar(t,2l).toString());
 		
 	}
 
@@ -123,16 +127,29 @@ public class ContatoDaoTest {
 		
 		
 	}
-
-
+	
+	public void testPesquisaNome(){
+		ContatoDao<Contato> dao = new ContatoDao<Contato>();
+		List<Contato> con = dao.pesquisaNome("tia");
+		
+		
+		for(Contato c : con){
+			System.out.println(c.toString());
+		}
+	}
+	
+	
 	public void testDeletar() {
+		ContatoDao<Contato> dao = new ContatoDao<Contato>();
+
+		dao.deletar(dao.pesquisar(new Contato(), 4L));
 		
 	}
 	
 	@Test
 	public void testes(){
 		
-		testPesquisarSubContato();
+		this.testListarContato();
 		
 	}
 
